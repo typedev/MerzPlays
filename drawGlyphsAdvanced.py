@@ -31,12 +31,12 @@ class MerzDemo:
 			delegate = self
 		)
 
-		self.w.merzNavi = merz.MerzView(
-			(-50, 35, -5, -40),
-			# centered = False,
-			backgroundColor = (.18, .18, .4, .5),
-			delegate = self
-		)
+		# self.w.merzNavi = merz.MerzView(
+		# 	(-50, 35, -5, -40),
+		# 	# centered = False,
+		# 	backgroundColor = (.18, .18, .4, .5),
+		# 	delegate = self
+		# )
 
 		self.merzW = 10000
 		self.merzH = 10000
@@ -52,18 +52,12 @@ class MerzDemo:
 		self.pointSizeMargins = 9
 		self.showMargins = True
 
-		self.scrollflag = True
 		self.glyphsMatrix = TDGlyphsMatrix(font = self.font, width = self.merzW)
 
-		# font = CurrentFont()
-		# glyphsList = 'M E R Z'.split(' ')
-		# xpos = 500
-		# for glyphname in glyphsList:
-		# 	self.drawGlyph(font[glyphname], xpos, self.heightLine)
-		# 	xpos += font[glyphname].width
-
-		# self.w.zoom.set(8)
 		self.w.open()
+
+	def acceptsMouseMoved (self):
+		return True
 
 	def drawMargins (self, container, glyph, italicAngle=0):
 		yctrl = 200
@@ -394,12 +388,7 @@ class MerzDemo:
 
 
 	def btn2Callback (self, sender):
-		# container = self.w.merzView.getMerzContainer()
-		# container.clearSublayers()
-		# xpos = 500
-		# ypos = (self.merzH / self.scaleFactor)  # - self.heightLine
-		# cline = 10
-		# gcount = 0
+
 		font = CurrentFont()
 		glyphsline = []
 		glyphsNavi = []
@@ -415,34 +404,34 @@ class MerzDemo:
 		self.startDrawGlyphsMatrix(self.w.merzView, self.glyphsMatrix.matrix)
 
 
-		navi = self.w.merzNavi.getMerzContainer()
-		hM = self.w.merzNavi.height()
-		wM = self.w.merzNavi.width()
-		navi.setSublayerScale(.012)
-
-		# xpos, ypos = position
-		color_glyph = (1, 1, 1, 1)
-		color_baselayer = (0, 0, 0, 0)
-		# xpos = 200
-		ypos = hM / .012 #(len(glyphsNavi)) * 1000
-		stepY = ypos / (len(glyphsNavi)) - 100
+		# navi = self.w.merzNavi.getMerzContainer()
+		# hM = self.w.merzNavi.height()
+		# wM = self.w.merzNavi.width()
+		# navi.setSublayerScale(.012)
+		#
+		# # xpos, ypos = position
+		# color_glyph = (1, 1, 1, 1)
+		# color_baselayer = (0, 0, 0, 0)
+		# # xpos = 200
+		# ypos = hM / .012 #(len(glyphsNavi)) * 1000
+		# stepY = ypos / (len(glyphsNavi)) - 100
+		# # with navi.sublayerGroup():
 		# with navi.sublayerGroup():
-		with navi.sublayerGroup():
-			baselayer = navi.appendRectangleSublayer(
-				# name = 'glyphbox.' + glyph.name,
-				position = (500, 500),
-				size = (wM/0.012 - 1000, ypos -500),
-				fillColor = (0,0,0,.3),
-				cornerRadius = 700
-				# acceptsHit = True
-			)
-
-			for g in glyphsNavi:
-				glyph = self.font[g]
-				ypos -= stepY
-				xpos = (wM/0.012 -1000 - glyph.width)/2
-				self.drawGlyph(baselayer, glyph, position = (xpos, ypos),
-				               drawMargins = False, color_glyph = color_glyph, color_box = color_baselayer)
+		# 	baselayer = navi.appendRectangleSublayer(
+		# 		# name = 'glyphbox.' + glyph.name,
+		# 		position = (500, 500),
+		# 		size = (wM/0.012 - 1000, ypos -500),
+		# 		fillColor = (0,0,0,.3),
+		# 		cornerRadius = 700
+		# 		# acceptsHit = True
+		# 	)
+		#
+		# 	for g in glyphsNavi:
+		# 		glyph = self.font[g]
+		# 		ypos -= stepY
+		# 		xpos = (wM/0.012 -1000 - glyph.width)/2
+		# 		self.drawGlyph(baselayer, glyph, position = (xpos, ypos),
+		# 		               drawMargins = False, color_glyph = color_glyph, color_box = color_baselayer)
 
 			
 		
