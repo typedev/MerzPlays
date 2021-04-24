@@ -56,7 +56,9 @@ class MerzDemo:
 
 		self.w.open()
 
-	def acceptsMouseMoved (self):
+	def acceptsMouseMoved (self, info):
+		return True
+	def acceptsFirstResponder (self, info):
 		return True
 
 	def drawMargins (self, container, glyph, italicAngle=0):
