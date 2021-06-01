@@ -89,6 +89,7 @@ if __name__ == "__main__":
 				delegate = self
 				)
 			self.w.btn = vanilla.Button((50,-55,200,21), 'rebuild' , callback=self.btnCallback)
+			self.w.zoom = vanilla.Slider((10, -85, -10, 23), callback = self.sliderCallback, value = 100)
 			self.scalefactor = 1
 			self.w.open()
 			self.drawMap()
@@ -121,23 +122,25 @@ if __name__ == "__main__":
 
 		def btnCallback(self, sender):
 			self.drawMap()
+
+		def acceptsFirstResponder (self, info):
+			return True
 			
 		def mouseDown(self, sender, event):
-			X_mouse_pos = int(round( event.locationInWindow().x, 0)) 
-			Y_mouse_pos = int(round( event.locationInWindow().y, 0)) 
+			X_mouse_pos = int(round( event.locationInWindow().x, 0))
+			Y_mouse_pos = int(round( event.locationInWindow().y, 0))
 			print ( 'mouse:', X_mouse_pos, Y_mouse_pos )
 
-			xW, yW, wW, hW = self.w.getPosSize() # self.w = vanilla.Window 
-			xM, yM, wM, hM = self.w.merzView.getPosSize() 
-			print ('window:',xW, yW, wW, hW)
-			print ('mertz:',xM, yM, wM, hM)
-	
-			x = X_mouse_pos - xM  
-			y = Y_mouse_pos + hM - hW + yM
-
 			container = self.w.merzView.getMerzContainer()
-			hits = container.findSublayersContainingPoint((x, y))
+			point = self.w.merzView.convertWindowCoordinateToViewCoordinate((X_mouse_pos, Y_mouse_pos))
+			hits = container.findSublayersContainingPoint((point))
 			print (hits)
-			# print ('layerName:', hits[0].getName()) 
+
+
+		def sliderCallback(self, info):
+			self.scalefactor = info.get()/100
+			c = self.w.merzView.getMerzContainer()
+			c.setSublayerScale(self.scalefactor)
+
 	
 	MerzDemo()
